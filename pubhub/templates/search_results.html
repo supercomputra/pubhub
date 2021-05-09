@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<form action="{% url 'search_results' %}" method="get">
+    {% csrf_token %}
+    <input style="margin-top: 16; margin-bottom: 16;" name="q" type="text" placeholder="Cari kata kunci, penulis, atau institusi" value={{ request.GET.q }}></input>
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+<div style="margin-top: 8px; margin-bottom: 8px;">Search results: {{ object_list|length }}</div>
+
+<ul>
+  {% for publication in object_list %}
+  <li style="display: flex; flex-direction: column">
+    <a href="{% url 'publication' pk=publication.id %}"><h3 style="margin-top: 8px; margin-bottom: 2px;">{{ publication.title }}</h3></a>
+    {{ publication.author.name }} • 
+    {{ publication.organization|default_if_none:"Independent Author" }}
+    • {{ publication.publication_date|date:"Y" }}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

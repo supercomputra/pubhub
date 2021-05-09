@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{% url 'search_results' %}" method="get">
+    {% csrf_token %}
+    <input style="margin-top: 16; margin-bottom: 16;" name="q" type="text" placeholder="Keyword, author, or organization" value={{ request.GET.q }}></input>
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+{% endblock content %}

@@ -1,7 +1,26 @@
 from django.contrib import admin
-from .models import Publication, Author, Organization
+from .models import *
 
 # Register your models here.
-admin.site.register(Publication)
-admin.site.register(Author)
-admin.site.register(Organization)
+
+
+class PublicationAdmin(admin.ModelAdmin):
+    list_display = ("title", "author",
+                    "publication_date")
+
+
+admin.site.register(Publication, PublicationAdmin)
+
+
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ("name", "modification_date", "creation_date")
+
+
+admin.site.register(Author, AuthorAdmin)
+
+
+class OrganizationAdmin(admin.ModelAdmin):
+    list_display = ("name", "modification_date", "creation_date")
+
+
+admin.site.register(Organization, OrganizationAdmin)

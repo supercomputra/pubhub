@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}PubHub{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <div
+      id="header"
+      style="
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 16px;
+      "
+    >
+      <div>
+        <a href="{% url 'home' %}"
+          ><h1 style="margin-top: 0; margin-bottom: 0">PubHub</h1></a
+        >
+        <span style="margin-top: 4; margin-bottom: 16">
+          Indonesian Publication Respository
+        </span>
+      </div>
+
+      <nav
+        id="navbar"
+        style="
+          display: flex;
+          flex-direction: row;
+          list-style-type: none;
+          padding: 0;
+          margin-left: auto;
+          margin-right: 0;
+        "
+      >
+        {% block navbar %}
+        <ul
+          style="
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            padding: 0;
+          "
+        >
+          {% if user.is_authenticated %}
+          <li style="padding: 0">
+            <a href="{% url 'author' %}"
+              ><span
+                class="fa fa-user-circle-o"
+                style="margin-right: 4px"
+              ></span
+              >{{user.first_name}} {{user.last_name}}</a
+            >
+          </li>
+          <li style="padding: 0; padding-left: 8px">
+            <a href="{% url 'logout' %}">Log Out</a>
+          </li>
+          {% else %}
+          <li style="padding: 0">
+            <a href="{% url 'login' %}">Log In</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% endblock %}
+      </nav>
+    </div>
+
+    <div id="content">{% block content %}{% endblock %}</div>
+  </body>
+</html>

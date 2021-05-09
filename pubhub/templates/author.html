@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block content %}
+<h3 style="margin: 16px 0 0 0"><u>Author Information</u></h3>
+<ul style="margin: 0 0 16px 0">
+  <li>First Name: {{ user.first_name }}</li>
+  <li>Last Name: {{ user.last_name }}</li>
+  <li>Email: {{ user.email }}</li>
+</ul>
+
+<div style="display: flex; flex-direction: row">
+  <h3 style="margin: 16px 0 0 0"><u>Publications</u></h3>
+  <button
+    style="margin: 16px 0 0 16px; border: 1px solid gray"
+    onclick="location.href='{% url 'publication_form' %}'"
+    type="button"
+  >
+    <span class="fa fa-plus"></span
+    ><span style="margin: 0 0 0 8px">Add Publication</span>
+  </button>
+</div>
+{% autoescape on %}
+<ul style="margin: 0 0 16px 0">
+  {% for publication in publications %}
+  <li style="display: flex; flex-direction: column">
+    <a href="{% url 'publication' pk=publication.id %}"
+      ><h3 style="margin-top: 8px; margin-bottom: 2px">
+        {{ publication.title }}
+      </h3></a
+    >
+    Published on {{ publication.publication_date }}
+  </li>
+  {% endfor %}
+</ul>
+{% endautoescape %} {% endblock %}

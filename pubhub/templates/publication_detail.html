@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block content %}
+<h3 style="margin: 16px 0 0 0"><u>Publication Information</u></h3>
+<ul style="margin: 0 0 16px 0">
+  <li>Title: {{ object.title }}</li>
+  <li>Author: {{ object.author.name }}</li>
+  <li>Publication Date: {{ object.publication_date }}</li>
+  {% load static %}
+  <a
+    href="{% get_media_prefix %}{{object.document.name}}"
+    style="text-decoration: None"
+    download
+    ><button>
+      <span class="fa fa-download"></span
+      ><span style="margin: 0 0 0 8px">Download</span>
+    </button>
+  
+  
+</ul>
+{% endblock %}
